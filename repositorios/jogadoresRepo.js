@@ -12,6 +12,12 @@ jogadores.push({
     posicao: "Atacante",
 });
 
+jogadores.push({
+    id: "3",
+    nome: "Allan Patrick",
+    posicao: "Meio Campo",
+});
+
 const jogadoresRepo = {
     getAllJogadores: () => {
         return jogadores;

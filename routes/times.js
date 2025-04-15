@@ -7,11 +7,13 @@ const timesController = require('../controllers/timesController')
 router.get('/', function(req, res, next) {
   let response = timesController.getAllTimes(req.get("api_key"));
   res.status(response.code).json(response.payload);
-
-  // let code = timesController.ApiKeyTest(req.get("api_key"));
-  // if (code == 403) res.sendStatus(code);
-  // else res.json(timesController.getAllTimes());
 });
+
+router.get('/:id/jogadores', function(req, res, next) {
+  let response = timesController.getJogadoresTime(req.get("api_key"), req.params.id);
+  res.status(response.code).json(response.payload);
+});
+
 
 router.get('/:id', function(req, res, next) {
   res.json(timesController.getTimeById(req.params.id));
