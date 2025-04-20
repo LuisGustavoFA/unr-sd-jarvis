@@ -6,8 +6,14 @@ const jogadoresController = {
         return (key == "ironman");
     },
 
-    getJogadorById(id) {
-        return jogadoresRepo.getJogadorById(id);
+    getJogadorById(apiKey, id) {
+        if (this.ApiKeyTest(apiKey)) {
+            let jogador = jogadoresRepo.getJogadorById(id);
+            let resposta = new Response(200, jogador, "OK");
+            return resposta;
+        } else {
+            return new Response(403, undefined, "Não Autorizado");
+        }
     },
 
     getAllJogadores(apiKey) {
@@ -20,8 +26,14 @@ const jogadoresController = {
         }
     },
 
-    addJogador(jogador) {
-        jogadoresRepo.addJogador(jogador);
+    addJogador(apiKey, jogador) {
+        if (this.ApiKeyTest(apiKey)) {
+            jogadoresRepo.addJogador(jogador);
+            return new Response(200, undefined, "OK")
+        } else {
+            return new Response(403, undefined, "Não Autorizado");
+        }
+        
     }
 }
 

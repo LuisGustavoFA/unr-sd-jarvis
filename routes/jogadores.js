@@ -9,12 +9,13 @@ router.get('/', function(req, res, next) {
 });
 
 router.get('/:id', function(req, res, next) {
-  res.json(jogadoresController.getJogadorById(req.params.id));
+  let response = jogadoresController.getJogadorById(req.get("api_key"), req.params.id)
+  res.status(response.code).json(response.payload);
 });
 
 router.post('/', function(req, res, next) {
-  jogadoresController.addJogador(req.body);
-  res.send("ok");
+  let response = jogadoresController.addJogador(req.get("api_key"), req.body);
+  res.status(response.code).json(response.payload);
 });
 
 module.exports = router;

@@ -1,22 +1,24 @@
+const Jogador = require("../models/Jogador")
+
 let jogadores = [];
 
-jogadores.push({
+jogadores.push(new Jogador({
   id: "1",
   nome: "Anthony",
   posicao: "Goleiro",
-});
+}));
 
-jogadores.push({
+jogadores.push(new Jogador({
     id: "2",
     nome: "Braithwaite",
     posicao: "Atacante",
-});
+}));
 
-jogadores.push({
+jogadores.push(new Jogador({
     id: "3",
     nome: "Allan Patrick",
     posicao: "Meio Campo",
-});
+}));
 
 const jogadoresRepo = {
     getAllJogadores: () => {
@@ -24,11 +26,11 @@ const jogadoresRepo = {
     },
     
     getJogadorById(id) {
-        return jogadores.find((elemento) => elemento.id == id);
+        return jogadores.find((jogador) => jogador.id == id);
     },
 
     addJogador: (jogador) => {
-        jogadores.push(jogador);
+        jogadores.push(new Jogador(jogador));
     }
 }
 

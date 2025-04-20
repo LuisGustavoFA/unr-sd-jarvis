@@ -9,8 +9,14 @@ const timesController = {
         return (key == "ironman");
     },
 
-    getTimeById(id) {
-        return timesRepo.getTimeById(id);
+    getTimeById(apiKey, id) {
+        if (this.ApiKeyTest(apiKey)) {
+            let time = timesRepo.getTimeById(id);
+            let resposta = new Response(200, time, "OK");
+            return resposta;
+        } else {
+            return new Response(403, undefined, "Não Autorizado");
+        }
     },
 
     getAllTimes(apiKey) {
@@ -37,8 +43,13 @@ const timesController = {
         }
     },
 
-    addTime(time) {
-        timesRepo.addTime(time);
+    addTime(apiKey, time) {
+        if (this.ApiKeyTest(apiKey)) {
+            timesRepo.addTime(time);
+            return new Response(200, undefined, "OK")
+        } else {
+            return new Response(403, undefined, "Não Autorizado");
+        }
     }
 }
 
