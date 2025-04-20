@@ -1,4 +1,5 @@
 var express = require('express');
+const cors = require('cors');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
@@ -9,6 +10,10 @@ var rotaTimes = require('./routes/times');
 var rotaJogadores = require('./routes/jogadores');
 
 var app = express();
+
+app.use(cors({
+    origin: 'http://localhost:5173'
+}));
 
 app.use(logger('dev'));
 app.use(express.json());
