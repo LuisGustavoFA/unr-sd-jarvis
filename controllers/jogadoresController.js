@@ -1,37 +1,33 @@
 const jogadoresRepo = require('../repositorios/jogadoresRepo');
 const Response = require('../models/Response');
+const services = require('../services');
 
 const jogadoresController = {
-    ApiKeyTest(key) {
-        return (key == "ironman");
-    },
-
     getJogadorById(apiKey, id) {
-        if (this.ApiKeyTest(apiKey)) {
+        if (services.ApiKeyTest(apiKey)) {
             let jogador = jogadoresRepo.getJogadorById(id);
-            let resposta = new Response(200, jogador, "OK");
-            return resposta;
+            return services.createOkResponse(jogador);
         } else {
-            return new Response(403, undefined, "Não Autorizado");
+            return services.createUnAuthResponse();
         }
     },
 
     getAllJogadores(apiKey) {
-        if (this.ApiKeyTest(apiKey)) {
+        if (services.ApiKeyTest(apiKey)) {
             let jogadores = jogadoresRepo.getAllJogadores();
-            let resposta = new Response(200, jogadores, "OK");
-            return resposta;
+            return services.createOkResponse(jogadores);
         } else {
-            return new Response(403, undefined, "Não Autorizado");
+            return services.createUnAuthResponse();
+
         }
     },
 
     addJogador(apiKey, jogador) {
-        if (this.ApiKeyTest(apiKey)) {
+        if (services.ApiKeyTest(apiKey)) {
             jogadoresRepo.addJogador(jogador);
-            return new Response(200, undefined, "OK")
+            return services.createOkResponse(undefined);
         } else {
-            return new Response(403, undefined, "Não Autorizado");
+            return services.createUnAuthResponse();
         }
         
     }

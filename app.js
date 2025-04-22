@@ -8,6 +8,7 @@ var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var rotaTimes = require('./routes/times');
 var rotaJogadores = require('./routes/jogadores');
+var rotaContratos = require('./routes/contratos');
 
 var app = express();
 
@@ -25,5 +26,6 @@ app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/times', rotaTimes);
 app.use('/jogadores', rotaJogadores);
+app.use('/contratos', rotaContratos);
 
 module.exports = app;

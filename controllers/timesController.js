@@ -1,54 +1,46 @@
 const timesRepo = require('../repositorios/timesRepo');
 const time_jogadorRepo = require("../repositorios/time_jogadorRepo");
-const jogadorRepo = require('../repositorios/jogadoresRepo');
-const Response = require('../models/Response');
 const jogadoresRepo = require('../repositorios/jogadoresRepo');
+const services = require('../services');
 
 const timesController = {
-    ApiKeyTest(key) {
-        return (key == "ironman");
-    },
-
     getTimeById(apiKey, id) {
-        if (this.ApiKeyTest(apiKey)) {
+        if (services.ApiKeyTest(apiKey)) {
             let time = timesRepo.getTimeById(id);
-            let resposta = new Response(200, time, "OK");
-            return resposta;
+            return services.createOkResponse(time);
         } else {
-            return new Response(403, undefined, "Não Autorizado");
+            return services.createUnAuthResponse();
         }
     },
 
     getAllTimes(apiKey) {
-        if (this.ApiKeyTest(apiKey)) {
+        if (services.ApiKeyTest(apiKey)) {
             let times = timesRepo.getAllTimes();
-            let resposta = new Response(200, times, "OK");
-            return resposta;
+            return services.createOkResponse(times);
         } else {
-            return new Response(403, undefined, "Não Autorizado");
+            return services.createUnAuthResponse();
         }
     },
 
     getJogadoresTime(apiKey, idTime) {
-        if (this.ApiKeyTest(apiKey)) {
+        if (services.ApiKeyTest(apiKey)) {
             let jogs = time_jogadorRepo.getJogadoresTime(idTime);
             let jogadores = [];
             jogs.forEach(id => {
                 jogadores.push(jogadoresRepo.getJogadorById(id));
             });
-            let resposta = new Response(200, jogadores, "OK");
-            return resposta;
+            return services.createOkResponse(jogadores);
         } else {
-            return new Response(403, undefined, "Não Autorizado");
+            return services.createUnAuthResponse();
         }
     },
 
     addTime(apiKey, time) {
-        if (this.ApiKeyTest(apiKey)) {
+        if (services.ApiKeyTest(apiKey)) {
             timesRepo.addTime(time);
-            return new Response(200, undefined, "OK")
+            return services.createOkResponse(undefined);
         } else {
-            return new Response(403, undefined, "Não Autorizado");
+            return services.createUnAuthResponse();
         }
     }
 }
