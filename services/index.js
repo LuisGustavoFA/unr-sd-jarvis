@@ -12,8 +12,9 @@ const services = {
     createUnAuthResponse() {
         return new Response(403, undefined, "Não Autorizado");
     },
-
+    
     createCreatedResponse() {
+        return new Response(201, undefined, "Criado");
 
     },
 

@@ -39,7 +39,7 @@ const time_jogadorRepo = {
       let temp = contratos.get(idTime);
       temp.push(idJogador);
       contratos.set(idTime, temp)
-    }
+    },
 }
 
 module.exports = time_jogadorRepo;
