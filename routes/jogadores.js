@@ -1,6 +1,9 @@
-var express = require('express');
+// var express = require('express');
+import express from 'express';
+
 var router = express.Router();
-const jogadoresController = require('../controllers/jogadoresController')
+// const jogadoresController = require('../controllers/jogadoresController')
+import jogadoresController from '../controllers/jogadoresController.js';
 
 router.get('/', function(req, res, next) {
   let response = jogadoresController.getAllJogadores(req.get("api_key"));
@@ -18,4 +21,4 @@ router.post('/', function(req, res, next) {
   res.status(response.code).json(response.payload);
 });
 
-module.exports = router;
+export default router;

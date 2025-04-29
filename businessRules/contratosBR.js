@@ -1,6 +1,9 @@
-const timesRepo = require('../repositorios/timesRepo');
-const jogadoresRepo = require('../repositorios/jogadoresRepo');
-const contratosRepo = require('../repositorios/contratosRepo');
+// const timesRepo = require('../repositorios/timesRepo');
+// const jogadoresRepo = require('../repositorios/jogadoresRepo');
+// const contratosRepo = require('../repositorios/contratosRepo');
+import timesRepo from '../repositorios/timesRepo.js';
+import jogadoresRepo from '../repositorios/jogadoresRepo.js';
+import contratosRepo from '../repositorios/contratosRepo.js';
 
 const contratosBR = {
     isAContract(contrato) {
@@ -64,4 +67,5 @@ const contratosBR = {
     }
 }
 
-module.exports = contratosBR
+// module.exports = contratosBR
+export default contratosBR;

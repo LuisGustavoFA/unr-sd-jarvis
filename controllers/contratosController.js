@@ -1,23 +1,25 @@
-const timesRepo = require('../repositorios/timesRepo');
-const jogadoresRepo = require('../repositorios/jogadoresRepo');
-const services = require('../services');
-const contratosBR = require('../businessRules/contratosBR');
-const contratosRepo = require('../repositorios/contratosRepo');
+// const services = require('../services');
+// import services from '../services';
+import { ApiKeyTest, createOkResponse, createUnAuthResponse, createCreatedResponse, createUnProcessableResponse } from '../services/index.js';
+// const contratosBR = require('../businessRules/contratosBR');
+import contratosBR from '../businessRules/contratosBR.js';
+// const contratosRepo = require('../repositorios/contratosRepo');
+import contratosRepo from '../repositorios/contratosRepo.js';
 // const Contrato = require('../models/Contrato');
 
 const contratosController = {
     getAllContratos() {
-        return services.createOkResponse(contratosRepo.getAllContratos());
+        return createOkResponse(contratosRepo.getAllContratos());
     },
 
     addContrato(apiKey, contrato) {
-        if (!services.ApiKeyTest(apiKey)) {
-            return services.createUnAuthResponse();
+        if (!ApiKeyTest(apiKey)) {
+            return createUnAuthResponse();
         }
 
         // const respBR = contratosBR.canCreate(contrato);
         // if (respBR != "OK") {
-        //     return services.createUnProcessableResponse(respBR);
+        //     return createUnProcessableResponse(respBR);
         // }
 
         // let contrato = Contrato.build(json);
@@ -25,11 +27,12 @@ const contratosController = {
         try{
             contratosBR.canCreate(contrato);
             contratosRepo.addContrato(contrato);
-            return services.createCreatedResponse();
+            return createCreatedResponse();
         } catch (error) {
-            return services.createUnProcessableResponse(error.message);
+            return createUnProcessableResponse(error.message);
         }
     }
 }
 
-module.exports = contratosController;
+// module.exports = contratosController;
+export default contratosController;

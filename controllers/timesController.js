@@ -1,48 +1,53 @@
-const timesRepo = require('../repositorios/timesRepo');
-const time_jogadorRepo = require("../repositorios/time_jogadorRepo");
-const jogadoresRepo = require('../repositorios/jogadoresRepo');
-const services = require('../services');
+// const timesRepo = require('../repositorios/timesRepo');
+import timesRepo from '../repositorios/timesRepo.js';
+// const time_jogadorRepo = require("../repositorios/time_jogadorRepo");
+import time_jogadorRepo from '../repositorios/time_jogadorRepo.js';
+// const jogadoresRepo = require('../repositorios/jogadoresRepo');
+import jogadoresRepo from '../repositorios/jogadoresRepo.js';
+// const services = require('../services');
+import { ApiKeyTest, createOkResponse, createUnAuthResponse } from '../services/index.js';
 
 const timesController = {
     getTimeById(apiKey, id) {
-        if (services.ApiKeyTest(apiKey)) {
+        if (ApiKeyTest(apiKey)) {
             let time = timesRepo.getTimeById(id);
-            return services.createOkResponse(time);
+            return createOkResponse(time);
         } else {
-            return services.createUnAuthResponse();
+            return createUnAuthResponse();
         }
     },
 
     getAllTimes(apiKey) {
-        if (services.ApiKeyTest(apiKey)) {
+        if (ApiKeyTest(apiKey)) {
             let times = timesRepo.getAllTimes();
-            return services.createOkResponse(times);
+            return createOkResponse(times);
         } else {
-            return services.createUnAuthResponse();
+            return createUnAuthResponse();
         }
     },
 
     getJogadoresTime(apiKey, idTime) {
-        if (services.ApiKeyTest(apiKey)) {
+        if (ApiKeyTest(apiKey)) {
             let jogs = time_jogadorRepo.getJogadoresTime(idTime);
             let jogadores = [];
             jogs.forEach(id => {
                 jogadores.push(jogadoresRepo.getJogadorById(id));
             });
-            return services.createOkResponse(jogadores);
+            return createOkResponse(jogadores);
         } else {
-            return services.createUnAuthResponse();
+            return createUnAuthResponse();
         }
     },
 
     addTime(apiKey, time) {
-        if (services.ApiKeyTest(apiKey)) {
+        if (ApiKeyTest(apiKey)) {
             timesRepo.addTime(time);
-            return services.createOkResponse(undefined);
+            return createOkResponse(undefined);
         } else {
-            return services.createUnAuthResponse();
+            return createUnAuthResponse();
         }
     }
 }
 
-module.exports = timesController;
+// module.exports = timesController;
+export default timesController;

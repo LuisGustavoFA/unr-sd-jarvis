@@ -1,14 +1,25 @@
-var express = require('express');
-const cors = require('cors');
-var path = require('path');
-var cookieParser = require('cookie-parser');
-var logger = require('morgan');
+// var express = require('express');
+import express from 'express';
+// const cors = require('cors');
+import cors from 'cors';
+// var path = require('path');
+import path from 'path';
 
-var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users');
-var rotaTimes = require('./routes/times');
-var rotaJogadores = require('./routes/jogadores');
-var rotaContratos = require('./routes/contratos');
+// workaround do __dirname
+import { fileURLToPath } from 'url';
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+// var cookieParser = require('cookie-parser');
+import cookieParser from 'cookie-parser';
+// var logger = require('morgan');
+import logger from 'morgan';
+
+import indexRouter from './routes/index.js';
+import usersRouter from './routes/users.js';
+import rotaTimes from './routes/times.js';
+import rotaJogadores from './routes/jogadores.js';
+import { rotaContratos } from './routes/contratos.js';
 
 var app = express();
 
@@ -28,4 +39,5 @@ app.use('/times', rotaTimes);
 app.use('/jogadores', rotaJogadores);
 app.use('/contratos', rotaContratos);
 
-module.exports = app;
+// module.exports = app;
+export default app;

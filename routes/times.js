@@ -1,7 +1,10 @@
-var express = require('express');
+// var express = require('express');
+import express from 'express';
+
 var router = express.Router();
 // const timesRepo = require('../repositorios/timesRepo');
-const timesController = require('../controllers/timesController')
+// const timesController = require('../controllers/timesController')
+import timesController from '../controllers/timesController.js';
 
 router.get('/', function(req, res, next) {
   let response = timesController.getAllTimes(req.get("api_key"));
@@ -23,4 +26,4 @@ router.post('/', function(req, res, next) {
   res.status(response.code).json(response.payload);
 });
 
-module.exports = router;
+export default router;

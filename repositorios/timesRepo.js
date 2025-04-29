@@ -1,4 +1,5 @@
-const Time = require("../models/Time")
+// const Time = require("../models/Time")
+import Time from "../models/Time.js";
 
 let times = [];
 
@@ -35,4 +36,5 @@ const timesRepo = {
     }
 }
 
-module.exports = timesRepo;
+// module.exports = timesRepo;
+export default timesRepo;

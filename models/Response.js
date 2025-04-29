@@ -6,4 +6,4 @@ class Response {
     }
 }
 
-module.exports = Response;
+export default Response;

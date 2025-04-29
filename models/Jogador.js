@@ -6,4 +6,4 @@ class Jogador {
     }
 }
 
-module.exports = Jogador;
+export default Jogador;

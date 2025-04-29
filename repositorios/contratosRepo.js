@@ -29,4 +29,5 @@ const contratosRepo = {
     }
 }
 
-module.exports = contratosRepo;
+// module.exports = contratosRepo;
+export default contratosRepo;

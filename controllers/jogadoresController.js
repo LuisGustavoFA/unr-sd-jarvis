@@ -1,36 +1,40 @@
-const jogadoresRepo = require('../repositorios/jogadoresRepo');
-const Response = require('../models/Response');
-const services = require('../services');
+// const jogadoresRepo = require('../repositorios/jogadoresRepo');
+import jogadoresRepo from '../repositorios/jogadoresRepo.js';
+// const Response = require('../models/Response');
+import Response from '../models/Response.js';
+import { ApiKeyTest, createOkResponse, createUnAuthResponse } from '../services/index.js';
+
 
 const jogadoresController = {
     getJogadorById(apiKey, id) {
-        if (services.ApiKeyTest(apiKey)) {
+        if (ApiKeyTest(apiKey)) {
             let jogador = jogadoresRepo.getJogadorById(id);
-            return services.createOkResponse(jogador);
+            return createOkResponse(jogador);
         } else {
-            return services.createUnAuthResponse();
+            return createUnAuthResponse();
         }
     },
 
     getAllJogadores(apiKey) {
-        if (services.ApiKeyTest(apiKey)) {
+        if (ApiKeyTest(apiKey)) {
             let jogadores = jogadoresRepo.getAllJogadores();
-            return services.createOkResponse(jogadores);
+            return createOkResponse(jogadores);
         } else {
-            return services.createUnAuthResponse();
+            return createUnAuthResponse();
 
         }
     },
 
     addJogador(apiKey, jogador) {
-        if (services.ApiKeyTest(apiKey)) {
+        if (ApiKeyTest(apiKey)) {
             jogadoresRepo.addJogador(jogador);
-            return services.createOkResponse(undefined);
+            return createOkResponse(undefined);
         } else {
-            return services.createUnAuthResponse();
+            return createUnAuthResponse();
         }
         
     }
 }
 
-module.exports = jogadoresController;
+// module.exports = jogadoresController;
+export default jogadoresController;

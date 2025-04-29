@@ -23,3 +23,5 @@ class Contrato {
         return this.fim == undefined || this.fim == "" || this.fim == null;
     }
 }
+
+export default Contrato;

@@ -1,4 +1,5 @@
-let Time = require('../models/Time');
+// let Time = require('../models/Time');
+import Time from '../models/Time.js';
 
 const contratos = new Map();
 
@@ -42,4 +43,5 @@ const time_jogadorRepo = {
     },
 }
 
-module.exports = time_jogadorRepo;
+// module.exports = time_jogadorRepo;
+export default time_jogadorRepo;

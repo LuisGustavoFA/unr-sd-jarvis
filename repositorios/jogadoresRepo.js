@@ -1,4 +1,5 @@
-const Jogador = require("../models/Jogador")
+// const Jogador = require("../models/Jogador")
+import Jogador from "../models/Jogador.js";
 
 let jogadores = [];
 
@@ -34,4 +35,5 @@ const jogadoresRepo = {
     }
 }
 
-module.exports = jogadoresRepo;
+// module.exports = jogadoresRepo;
+export default jogadoresRepo;
