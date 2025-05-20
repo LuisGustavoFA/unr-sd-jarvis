@@ -1,32 +1,40 @@
 // var express = require('express');
 import express from 'express';
+import usersController from '../controllers/usersController.js';
 
 var router = express.Router();
 
-let users = [
-  {
-    id: 1,
-    nome: "Fulano",
-    idade: 19,
-    endereco: "rual tal 123"
-  },
-  {
-    id: 2,
-    nome: "Dilano",
-    idade: 22,
-    endereco: "rual mal 231"
-  },
-  {
-    id: 3,
-    nome: "Trilano",
-    idade: 24,
-    endereco: "rual cal 321"
-  }
-];
-
 /* GET users listing. */
 router.get('/', function(req, res, next) {
-  res.send(users);
+  res.send("Send something here");
+});
+
+router.post('/', function(req, res, next) {
+  usersController.criarLoginFirebase(req.body.email, req.body.password)
+    .then(
+      (resposta) => {
+        res.status(201).send(resposta);
+      }
+    )
+    .catch(
+      (erro) => {
+        res.status(500).send(erro);
+      }
+    )
+});
+
+router.post('/login', function(req, res, next) {
+  usersController.fazerLoginFirebase(req.body.email, req.body.password)
+    .then(
+      (resposta) => {
+        res.status(200).send(resposta);
+      }
+    )
+    .catch(
+      (erro) => {
+        res.status(401).send(erro);
+      }
+    )
 });
 
 export default router;

@@ -6,20 +6,21 @@ import time_jogadorRepo from '../repositorios/time_jogadorRepo.js';
 import jogadoresRepo from '../repositorios/jogadoresRepo.js';
 // const services = require('../services');
 import { ApiKeyTest, createOkResponse, createUnAuthResponse } from '../services/index.js';
+import firestoreServices from '../services/firestore.js';
 
 const timesController = {
     getTimeById(apiKey, id) {
         if (ApiKeyTest(apiKey)) {
-            let time = timesRepo.getTimeById(id);
+            let time = timesRepo.getAllTimes();
             return createOkResponse(time);
         } else {
             return createUnAuthResponse();
         }
     },
 
-    getAllTimes(apiKey) {
+    async getAllTimes(apiKey) {
         if (ApiKeyTest(apiKey)) {
-            let times = timesRepo.getAllTimes();
+            let times = await firestoreServices.getAllTimes();
             return createOkResponse(times);
         } else {
             return createUnAuthResponse();

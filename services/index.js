@@ -1,5 +1,33 @@
 // const Response = require('../models/Response');
 import Response from '../models/Response.js';
+import firebaseApp from './firebaseApp.js';
+import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth";
+
+export function criarUsuarioComEmailSenha(email, password) {
+    return new Promise((resolve, reject) => {
+        const auth = getAuth();
+        createUserWithEmailAndPassword(auth, email, password)
+            .then((userCredential) => {
+                resolve(userCredential);
+            })
+            .catch((error) => {
+                reject(error);
+      });
+    });
+}
+
+export function loginUsuarioComEmailSenha(email, password) {
+    return new Promise((resolve, reject) => {
+        const auth = getAuth();
+        signInWithEmailAndPassword(auth, email, password)
+            .then((userCredential) => {
+                resolve(userCredential);
+            })
+            .catch((error) => {
+                reject(error);
+      });
+    });
+}
 
 export function ApiKeyTest(key) {
     return (key == "ironman");
